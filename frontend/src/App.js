@@ -38,7 +38,7 @@ const RedirectUser = ({ user }) => {
         return <Navigate to="/escritorio" />;
     }
 
-    return <Navigate to="/no-access" />;
+    return <Navigate to="/NoAccess" />;
 };
 
 export default App;
