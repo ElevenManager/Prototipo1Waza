@@ -1,35 +1,36 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
     const user = JSON.parse(localStorage.getItem('user'));
 
     return (
         <div>
-            <h1>Welcome, {user.nombre}</h1>
+            <h1>Welcome, {user ? user.nombre : 'Guest'}</h1>
             <ul>
-                {user.escritorio && <li><a href="/escritorio">Escritorio</a></li>}
-                {user.pacientes && <li><a href="/pacientes">Pacientes</a></li>}
-                {user.clinica && (
+                {user && user.escritorio && <li><Link to="/escritorio">Escritorio</Link></li>}
+                {user && user.pacientes && <li><Link to="/pacientes">Pacientes</Link></li>}
+                {user && user.clinica && (
                     <li>
-                        <a href="/clinica">Clínica</a>
+                        <Link to="/clinica">Clínica</Link>
                         <ul>
-                            <li><a href="/configuracion">Configuraciones</a></li>
-                            <li><a href="/servicio">Servicios</a></li>
-                            <li><a href="/personal">Personal</a></li>
-                            <li><a href="/permiso">Permisos</a></li>
-                            <li><a href="/diagnostico">Diagnóstico</a></li>
+                            <li><Link to="/configuracion">Configuraciones</Link></li>
+                            <li><Link to="/servicio">Servicios</Link></li>
+                            <li><Link to="/personal">Personal</Link></li>
+                            <li><Link to="/permiso">Permisos</Link></li>
+                            <li><Link to="/diagnostico">Diagnóstico</Link></li>
                         </ul>
                     </li>
                 )}
-                {user.atencion && <li><a href="/atencion">Atención</a></li>}
-                {user.triaje && <li><a href="/triaje">Triaje</a></li>}
-                {user.resultado && <li><a href="/plan">Plan de Atención</a></li>}
-                {user.consultas && (
+                {user && user.atencion && <li><Link to="/atencion">Atención</Link></li>}
+                {user && user.triaje && <li><Link to="/triaje">Triaje</Link></li>}
+                {user && user.resultado && <li><Link to="/plan">Plan de Atención</Link></li>}
+                {user && user.consultas && (
                     <li>
-                        <a href="/consultas">Consultas</a>
+                        <Link to="/consultas">Consultas</Link>
                         <ul>
-                            <li><a href="/pagos">Pagos</a></li>
-                            <li><a href="/historias">Historias</a></li>
+                            <li><Link to="/pagos">Pagos</Link></li>
+                            <li><Link to="/historias">Historias</Link></li>
                         </ul>
                     </li>
                 )}

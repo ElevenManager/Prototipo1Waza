@@ -143,6 +143,7 @@ exports.verifyUser = async (req, res) => {
                 id: user.idusuario,
                 login: user.login,
                 nombre: user.nombre,
+                permisos: Object.keys(permissions).filter(key => permissions[key])
             },
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
