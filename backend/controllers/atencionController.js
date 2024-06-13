@@ -98,28 +98,11 @@ router.get('/ListarAtenciones/:idp', async (req, res) => {
     const { idp } = req.params;
     try {
         const result = await Atencion.listarAtenciones(idp);
-        let responseHtml = `
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Historia</th>
-                    <th>Receta</th>
-                </tr>
-            </thead>`;
-
-        result.forEach(reg => {
-            responseHtml += `
-                <tr>
-                    <td>${reg.fecha}</td>
-                    <td><a target="_blank" href="../reportes/historia.php?idatencion=${reg.idatencion}">${reg.idatencion}</a></td>
-                    <td><a target="_blank" href="../reportes/receta.php?idatencion=${reg.idatencion}">${reg.idatencion}</a></td>
-                </tr>`;
-        });
-
-        res.send(responseHtml);
+        res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 module.exports = router;

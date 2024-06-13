@@ -1,3 +1,4 @@
+// personaController.js
 const express = require('express');
 const router = express.Router();
 const Persona = require('../models/persona');
@@ -113,24 +114,18 @@ router.get('/listar', async (req, res) => {
     try {
         const result = await Persona.listar(texto);
         const data = result.map((reg, index) => ({
-            0: `<button title="Editar" class="btn btn-warning" onclick="mostrar(${reg.idpersona})"><i class="fa fa-pencil"></i></button> <button title="Historia Clínicas" class="btn btn-info" onclick="historia(${reg.idpersona})"><i class="fa fa-file"></i></button>`,
-            1: reg.apaterno,
-            2: reg.amaterno,
-            3: reg.nombre,
-            4: reg.fecha_nacimiento,
-            5: reg.sexo,
-            6: reg.estado_civil,
-            7: reg.num_documento,
-            8: reg.direccion,
-            9: reg.telefono
+            idpersona: reg.idpersona,
+            apaterno: reg.apaterno,
+            amaterno: reg.amaterno,
+            nombre: reg.nombre,
+            fecha_nacimiento: reg.fecha_nacimiento,
+            sexo: reg.sexo,
+            estado_civil: reg.estado_civil,
+            num_documento: reg.num_documento,
+            direccion: reg.direccion,
+            telefono: reg.telefono
         }));
-        const results = {
-            sEcho: 1,
-            iTotalRecords: data.length,
-            iTotalDisplayRecords: data.length,
-            aaData: data
-        };
-        res.status(200).json(results);
+        res.status(200).json({ data });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

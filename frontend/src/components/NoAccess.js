@@ -1,9 +1,11 @@
+// NoAccess.js
 import React from 'react';
 
 const NoAccess = () => {
     return (
         <div>
-            <h1>No tienes acceso a esta sección</h1>
+            <h1>No Access</h1>
+            <p>You do not have permission to view this page.</p>
         </div>
     );
 };

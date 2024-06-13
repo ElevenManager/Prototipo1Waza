@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './components/Login';
 import Escritorio from './components/Escritorio';
 import ProtectedRoute from './components/ProtectedRoute';
+import Pacientes from './components/Pacientes';
 import DashboardLayout from './components/DashboardLayout';
 import NoAccess from './components/NoAccess';
 import './App.css';
@@ -22,6 +23,7 @@ const App = () => {
                 >
                     <Route index element={<RedirectUser user={user} />} />
                     <Route path="escritorio" element={<ProtectedRoute user={user} token={token} requiredPermission="escritorio"><Escritorio /></ProtectedRoute>} />
+                    <Route path="pacientes" element={<ProtectedRoute user={user} token={token} requiredPermission="pacientes"><Pacientes /></ProtectedRoute>} />
                     {/* Agrega aquí las otras rutas protegidas */}
                 </Route>
             </Routes>
@@ -37,8 +39,12 @@ const RedirectUser = ({ user }) => {
     if (user.escritorio) {
         return <Navigate to="/escritorio" />;
     }
+    if (user.pacientes) {
+        return <Navigate to="/pacientes" />;
+    }
 
-    return <Navigate to="/NoAccess" />;
+
+    return <Navigate to="/no-access" />;
 };
 
 export default App;
