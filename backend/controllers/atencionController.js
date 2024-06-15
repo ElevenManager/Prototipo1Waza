@@ -104,5 +104,4 @@ router.get('/ListarAtenciones/:idp', async (req, res) => {
     }
 });
 
-
 module.exports = router;

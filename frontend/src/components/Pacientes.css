@@ -1,38 +1,15 @@
-.pacientes-container {
-    padding: 20px;
-}
-
-#formularioregistros {
-    display: flex;
-    flex-direction: column;
-}
-
-#tbllistado {
+.react-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-#tbllistado th, #tbllistado td {
+.react-table th,
+.react-table td {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#tbllistado th {
-    background-color: #f2f2f2;
-    text-align: left;
-}
-
-#hisotoriac {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-#hisotoriac th, #hisotoriac td {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-#hisotoriac th {
+.react-table th {
     background-color: #f2f2f2;
     text-align: left;
 }

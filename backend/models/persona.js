@@ -11,8 +11,8 @@ const Persona = {
             `INSERT INTO persona (apaterno, amaterno, nombre, fecha_nacimiento, sexo, estado_civil, alergia, intervenciones_quirurgicas,
         vacunas_completas, tipo_documento, num_documento, direccion, telefono, email, ocupacion, persona_responsable)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [apaterno, amaterno, nombre, fecha_nacimiento, sexo, estado_civil, alergia, intervenciones_quirurgicas, vacunas_completas,
-                tipo_documento, num_documento, direccion, telefono, email, ocupacion, persona_responsable]
+            [apaterno || null, amaterno || null, nombre || null, fecha_nacimiento || null, sexo || null, estado_civil || null, alergia || null, intervenciones_quirurgicas || null, vacunas_completas || null,
+                tipo_documento || null, num_documento || null, direccion || null, telefono || null, email || null, ocupacion || null, persona_responsable || null]
         );
 
         return result.insertId;
@@ -28,8 +28,8 @@ const Persona = {
             `UPDATE persona SET apaterno=?, amaterno=?, nombre=?, fecha_nacimiento=?, sexo=?, estado_civil=?, alergia=?, 
        intervenciones_quirurgicas=?, vacunas_completas=?, tipo_documento=?, num_documento=?, direccion=?, telefono=?, email=?, 
        ocupacion=?, persona_responsable=? WHERE idpersona=?`,
-            [apaterno, amaterno, nombre, fecha_nacimiento, sexo, estado_civil, alergia, intervenciones_quirurgicas, vacunas_completas,
-                tipo_documento, num_documento, direccion, telefono, email, ocupacion, persona_responsable, idpersona]
+            [apaterno || null, amaterno || null, nombre || null, fecha_nacimiento || null, sexo || null, estado_civil || null, alergia || null, intervenciones_quirurgicas || null, vacunas_completas || null,
+                tipo_documento || null, num_documento || null, direccion || null, telefono || null, email || null, ocupacion || null, persona_responsable || null, idpersona]
         );
 
         return true;
@@ -53,7 +53,7 @@ const Persona = {
     listar: async (texto) => {
         const [rows] = await db.execute(
             `SELECT * FROM persona WHERE apaterno LIKE CONCAT('%', ?, '%') OR amaterno LIKE CONCAT('%', ?, '%') OR num_documento=? ORDER BY apaterno ASC, amaterno ASC LIMIT 200`,
-            [texto, texto, texto]
+            [texto || '', texto || '', texto || '']
         );
         return rows;
     },

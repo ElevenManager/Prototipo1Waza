@@ -1,4 +1,3 @@
-// personaController.js
 const express = require('express');
 const router = express.Router();
 const Persona = require('../models/persona');
@@ -28,46 +27,32 @@ router.post('/guardaryeditar', async (req, res) => {
     } = req.body;
 
     try {
+        const personaData = {
+            idpersona: limpiarCadena(idpersona) || null,
+            apaterno: limpiarCadena(apaterno) || null,
+            amaterno: limpiarCadena(amaterno) || null,
+            nombre: limpiarCadena(nombre) || null,
+            fecha_nacimiento: limpiarCadena(fecha_nacimiento) || null,
+            sexo: limpiarCadena(sexo) || null,
+            estado_civil: limpiarCadena(estado_civil) || null,
+            alergia: limpiarCadena(alergia) || null,
+            intervenciones_quirurgicas: limpiarCadena(intervenciones_quirurgicas) || null,
+            vacunas_completas: limpiarCadena(vacunas_completas) || null,
+            tipo_documento: limpiarCadena(tipo_documento) || null,
+            num_documento: limpiarCadena(num_documento) || null,
+            direccion: limpiarCadena(direccion) || null,
+            telefono: limpiarCadena(telefono) || null,
+            email: limpiarCadena(email) || null,
+            ocupacion: limpiarCadena(ocupacion) || null,
+            persona_responsable: limpiarCadena(persona_responsable) || null
+        };
+
+        let result;
         if (!idpersona) {
-            const result = await Persona.insertar({
-                apaterno: limpiarCadena(apaterno),
-                amaterno: limpiarCadena(amaterno),
-                nombre: limpiarCadena(nombre),
-                fecha_nacimiento: limpiarCadena(fecha_nacimiento),
-                sexo: limpiarCadena(sexo),
-                estado_civil: limpiarCadena(estado_civil),
-                alergia: limpiarCadena(alergia),
-                intervenciones_quirurgicas: limpiarCadena(intervenciones_quirurgicas),
-                vacunas_completas: limpiarCadena(vacunas_completas),
-                tipo_documento: limpiarCadena(tipo_documento),
-                num_documento: limpiarCadena(num_documento),
-                direccion: limpiarCadena(direccion),
-                telefono: limpiarCadena(telefono),
-                email: limpiarCadena(email),
-                ocupacion: limpiarCadena(ocupacion),
-                persona_responsable: limpiarCadena(persona_responsable)
-            });
+            result = await Persona.insertar(personaData);
             res.status(200).json({ message: "Paciente registrado", result });
         } else {
-            const result = await Persona.editar({
-                idpersona,
-                apaterno: limpiarCadena(apaterno),
-                amaterno: limpiarCadena(amaterno),
-                nombre: limpiarCadena(nombre),
-                fecha_nacimiento: limpiarCadena(fecha_nacimiento),
-                sexo: limpiarCadena(sexo),
-                estado_civil: limpiarCadena(estado_civil),
-                alergia: limpiarCadena(alergia),
-                intervenciones_quirurgicas: limpiarCadena(intervenciones_quirurgicas),
-                vacunas_completas: limpiarCadena(vacunas_completas),
-                tipo_documento: limpiarCadena(tipo_documento),
-                num_documento: limpiarCadena(num_documento),
-                direccion: limpiarCadena(direccion),
-                telefono: limpiarCadena(telefono),
-                email: limpiarCadena(email),
-                ocupacion: limpiarCadena(ocupacion),
-                persona_responsable: limpiarCadena(persona_responsable)
-            });
+            result = await Persona.editar(personaData);
             res.status(200).json({ message: "Paciente actualizado", result });
         }
     } catch (error) {

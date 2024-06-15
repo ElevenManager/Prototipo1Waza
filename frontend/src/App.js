@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+// src/App.js
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import Escritorio from './components/Escritorio';
 import ProtectedRoute from './components/ProtectedRoute';
 import Pacientes from './components/Pacientes';
+import Configuracion from './components/Configuracion';
 import DashboardLayout from './components/DashboardLayout';
 import NoAccess from './components/NoAccess';
+
 import './App.css';
 
 const App = () => {
@@ -24,6 +27,8 @@ const App = () => {
                     <Route index element={<RedirectUser user={user} />} />
                     <Route path="escritorio" element={<ProtectedRoute user={user} token={token} requiredPermission="escritorio"><Escritorio /></ProtectedRoute>} />
                     <Route path="pacientes" element={<ProtectedRoute user={user} token={token} requiredPermission="pacientes"><Pacientes /></ProtectedRoute>} />
+                    <Route path="configuracion" element={<ProtectedRoute user={user} token={token} requiredPermission="clinica"><Configuracion /></ProtectedRoute>} />
+
                     {/* Agrega aquí las otras rutas protegidas */}
                 </Route>
             </Routes>
@@ -42,7 +47,9 @@ const RedirectUser = ({ user }) => {
     if (user.pacientes) {
         return <Navigate to="/pacientes" />;
     }
-
+    if (user.clinica) {
+        return <Navigate to="/configuracion" />;
+    }
 
     return <Navigate to="/no-access" />;
 };

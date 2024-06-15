@@ -1,15 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css'; // Asegúrate de que este archivo existe
+import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals'; // Asegúrate de que este archivo existe
+import reportWebVitals from './reportWebVitals';
+
+
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme();
 
 ReactDOM.render(
-    <React.StrictMode>
+    <ThemeProvider theme={theme}>
         <App />
-    </React.StrictMode>,
+    </ThemeProvider>,
     document.getElementById('root')
 );
 
-// Si no necesitas reportar métricas web, puedes comentar la línea siguiente
+// reporte de metricas web
 reportWebVitals();
