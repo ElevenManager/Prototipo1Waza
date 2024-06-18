@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Persona = require('../models/persona');
 
-// Middleware para limpiar los datos
 const limpiarCadena = (str) => str ? str.toString().trim() : '';
 
 router.post('/guardaryeditar', async (req, res) => {
@@ -87,6 +86,7 @@ router.get('/mostrar/:idpersona', async (req, res) => {
 
     try {
         const result = await Persona.mostrar(idpersona);
+        console.log('Resultado de la consulta mostrar en controlador:', result); // Depuración
         res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -121,6 +121,69 @@ router.post('/buscar', async (req, res) => {
 
     try {
         const result = await Persona.buscar(documento);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+router.get('/select', async (req, res) => {
+    try {
+        const result = await Persona.select();
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/imprimirHistoria/:idatencion', async (req, res) => {
+    const { idatencion } = req.params;
+
+    try {
+        const result = await Persona.imprimirHistoria(idatencion);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/imprimirDetalleHistoria/:idatencion', async (req, res) => {
+    const { idatencion } = req.params;
+
+    try {
+        const result = await Persona.imprimirDetalleHistoria(idatencion);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/imprimirReceta/:idatencion', async (req, res) => {
+    const { idatencion } = req.params;
+
+    try {
+        const result = await Persona.imprimirReceta(idatencion);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/imprimirCabeceraHistoria/:idpersona', async (req, res) => {
+    const { idpersona } = req.params;
+
+    try {
+        const result = await Persona.imprimirCabeceraHistoria(idpersona);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/imprimirAtencionHistoria/:idpersona', async (req, res) => {
+    const { idpersona } = req.params;
+
+    try {
+        const result = await Persona.imprimirAtencionHistoria(idpersona);
         res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ error: error.message });

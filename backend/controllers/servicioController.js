@@ -54,24 +54,14 @@ exports.listar = async (req, res) => {
     try {
         const result = await Servicio.listar();
         const data = result.map(reg => ({
-            0: reg.condicion ? `<button title="Editar" class="btn btn-warning" onclick="mostrar(${reg.idservicio})"><i class="fa fa-pencil"></i></button>
-                                 <button title="Desactivar" class="btn btn-danger" onclick="desactivar(${reg.idservicio})"><i class="fa fa-close"></i></button>` :
-                `<button title="Editar" class="btn btn-warning" onclick="mostrar(${reg.idservicio})"><i class="fa fa-pencil"></i></button>
-                                <button title="Activar" class="btn btn-primary" onclick="activar(${reg.idservicio})"><i class="fa fa-check"></i></button>`,
-            1: reg.nombre,
-            2: reg.costo,
-            3: reg.condicion ? '<span class="label bg-green">Activado</span>' : '<span class="label bg-red">Desactivado</span>',
-            4: reg.categoria
+            idservicio: reg.idservicio,
+            nombre: reg.nombre,
+            costo: reg.costo,
+            condicion: reg.condicion,
+            categoria: reg.categoria
         }));
 
-        const results = {
-            sEcho: 1,
-            iTotalRecords: data.length,
-            iTotalDisplayRecords: data.length,
-            aaData: data
-        };
-
-        res.status(200).json(results);
+        res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

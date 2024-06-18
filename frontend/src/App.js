@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
@@ -6,6 +5,7 @@ import Escritorio from './components/Escritorio';
 import ProtectedRoute from './components/ProtectedRoute';
 import Pacientes from './components/Pacientes';
 import Configuracion from './components/Configuracion';
+import Servicios from './components/Servicios';
 import DashboardLayout from './components/DashboardLayout';
 import NoAccess from './components/NoAccess';
 
@@ -28,9 +28,9 @@ const App = () => {
                     <Route path="escritorio" element={<ProtectedRoute user={user} token={token} requiredPermission="escritorio"><Escritorio /></ProtectedRoute>} />
                     <Route path="pacientes" element={<ProtectedRoute user={user} token={token} requiredPermission="pacientes"><Pacientes /></ProtectedRoute>} />
                     <Route path="configuracion" element={<ProtectedRoute user={user} token={token} requiredPermission="clinica"><Configuracion /></ProtectedRoute>} />
-
-                    {/* Agrega aquí las otras rutas protegidas */}
+                    <Route path="servicios" element={<ProtectedRoute user={user} token={token} requiredPermission="clinica"><Servicios /></ProtectedRoute>} />
                 </Route>
+
             </Routes>
         </Router>
     );

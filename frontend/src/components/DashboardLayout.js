@@ -21,7 +21,7 @@ const DashboardLayout = () => {
                             <Link to="#">Clínica</Link>
                             <ul>
                                 <li><Link to="/configuracion">Configuraciones</Link></li>
-                                <li><Link to="/servicio">Servicios</Link></li>
+                                <li><Link to="/servicios">Servicios</Link></li>
                                 <li><Link to="/personal">Personal</Link></li>
                                 <li><Link to="/permiso">Permisos</Link></li>
                                 <li><Link to="/diagnostico">Diagnóstico</Link></li>

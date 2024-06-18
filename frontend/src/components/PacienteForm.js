@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-    TextField, Button, Dialog, DialogActions, DialogContent, DialogTitle
+    TextField, Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem
 } from '@mui/material';
 
 const PacienteForm = ({ open, onClose, onSave, paciente }) => {
@@ -26,7 +26,14 @@ const PacienteForm = ({ open, onClose, onSave, paciente }) => {
 
     useEffect(() => {
         if (paciente) {
-            setFormData(paciente);
+            // Convertir fecha_nacimiento a 'yyyy-MM-dd'
+            const fechaNacimiento = paciente.fecha_nacimiento ? new Date(paciente.fecha_nacimiento).toISOString().split('T')[0] : '';
+            setFormData({
+                ...paciente,
+                fecha_nacimiento: fechaNacimiento,
+                tipo_documento: paciente.tipo_documento || 'DNI',  // Asegurarse que el tipo_documento no sea undefined
+                vacunas_completas: paciente.vacunas_completas || 'SI'  // Asegurarse que vacunas_completas no sea undefined
+            });
         } else {
             setFormData({
                 idpersona: '',
@@ -73,19 +80,19 @@ const PacienteForm = ({ open, onClose, onSave, paciente }) => {
                     <TextField name="nombre" label="Nombre" value={formData.nombre} onChange={handleChange} fullWidth margin="normal" required />
                     <TextField name="fecha_nacimiento" label="Fecha de Nacimiento" type="date" value={formData.fecha_nacimiento} onChange={handleChange} fullWidth margin="normal" InputLabelProps={{ shrink: true }} required />
                     <TextField name="sexo" label="Sexo" select value={formData.sexo} onChange={handleChange} fullWidth margin="normal" required>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
+                        <MenuItem value="M">Masculino</MenuItem>
+                        <MenuItem value="F">Femenino</MenuItem>
                     </TextField>
                     <TextField name="estado_civil" label="Estado Civil" select value={formData.estado_civil} onChange={handleChange} fullWidth margin="normal" required>
-                        <option value="S">Soltero</option>
-                        <option value="C">Casado</option>
-                        <option value="V">Viudo</option>
-                        <option value="D">Divorciado</option>
+                        <MenuItem value="S">Soltero</MenuItem>
+                        <MenuItem value="C">Casado</MenuItem>
+                        <MenuItem value="V">Viudo</MenuItem>
+                        <MenuItem value="D">Divorciado</MenuItem>
                     </TextField>
                     <TextField name="tipo_documento" label="Tipo Documento" select value={formData.tipo_documento} onChange={handleChange} fullWidth margin="normal" required>
-                        <option value="DNI">DNI</option>
-                        <option value="RUC">RUC</option>
-                        <option value="CEDULA">CEDULA</option>
+                        <MenuItem value="DNI">DNI</MenuItem>
+                        <MenuItem value="RUC">RUC</MenuItem>
+                        <MenuItem value="CEDULA">CEDULA</MenuItem>
                     </TextField>
                     <TextField name="num_documento" label="Número Documento" value={formData.num_documento} onChange={handleChange} fullWidth margin="normal" required />
                     <TextField name="direccion" label="Dirección" value={formData.direccion} onChange={handleChange} fullWidth margin="normal" />
@@ -96,8 +103,8 @@ const PacienteForm = ({ open, onClose, onSave, paciente }) => {
                     <TextField name="alergia" label="Alergias" value={formData.alergia} onChange={handleChange} fullWidth margin="normal" />
                     <TextField name="intervenciones_quirurgicas" label="Intervenciones Quirúrgicas" value={formData.intervenciones_quirurgicas} onChange={handleChange} fullWidth margin="normal" />
                     <TextField name="vacunas_completas" label="Vacunas Completas" select value={formData.vacunas_completas} onChange={handleChange} fullWidth margin="normal" required>
-                        <option value="SI">SI</option>
-                        <option value="NO">NO</option>
+                        <MenuItem value="SI">SI</MenuItem>
+                        <MenuItem value="NO">NO</MenuItem>
                     </TextField>
                 </form>
             </DialogContent>

@@ -35,13 +35,9 @@ const Persona = {
         return true;
     },
 
-    eliminar: async (idpersona) => {
-        await db.execute(`DELETE FROM persona WHERE idpersona=?`, [idpersona]);
-        return true;
-    },
-
     mostrar: async (idpersona) => {
         const [rows] = await db.execute(`SELECT * FROM persona WHERE idpersona=?`, [idpersona]);
+        console.log('Resultado de la consulta mostrar:', rows[0]); // Depuración
         return rows[0];
     },
 
